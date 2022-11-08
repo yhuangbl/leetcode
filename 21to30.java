@@ -1,10 +1,6 @@
 /**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode(int x) { val = x; }
- * }
+ * Definition for singly-linked list. public class ListNode { int val; ListNode
+ * next; ListNode(int x) { val = x; } }
  */
 class Solution21 {
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
@@ -19,17 +15,14 @@ class Solution21 {
                 if (l1p.val < l2p.val) {
                     newNode = new ListNode(l1p.val);
                     l1p = l1p.next;
-                }
-                else {
+                } else {
                     newNode = new ListNode(l2p.val);
                     l2p = l2p.next;
                 }
-            }
-            else if (l1p == null) {
+            } else if (l1p == null) {
                 newNode = new ListNode(l2p.val);
                 l2p = l2p.next;
-            }
-            else if (l2p == null) {
+            } else if (l2p == null) {
                 newNode = new ListNode(l1p.val);
                 l1p = l1p.next;
             }
@@ -37,8 +30,7 @@ class Solution21 {
             if (result == null) {
                 result = newNode;
                 resultp = newNode;
-            }
-            else {
+            } else {
                 resultp.next = newNode;
                 resultp = newNode;
             }
@@ -50,22 +42,20 @@ class Solution21 {
 class Solution22 {
     private List<String> generateParenthesisHelper(int n, int pairCount, int openCount, String curr) {
         int len = curr.length();
-        if (len == n*2) {
+        if (len == n * 2) {
             return Arrays.asList(curr);
         }
-        boolean isFullyClosed = (pairCount*2 == len);
+        boolean isFullyClosed = (pairCount * 2 == len);
 
         List<String> result = new ArrayList<String>();
-        char last = curr.charAt(len-1);
+        char last = curr.charAt(len - 1);
         if (openCount == n) {
-            result.addAll(generateParenthesisHelper(n, pairCount+1, openCount, curr+")"));
-        }
-        else if (isFullyClosed) {
-            result.addAll(generateParenthesisHelper(n, pairCount, openCount+1, curr+"("));
-        }
-        else {
-            result.addAll(generateParenthesisHelper(n, pairCount+1, openCount, curr+")"));
-            result.addAll(generateParenthesisHelper(n, pairCount, openCount+1, curr+"("));
+            result.addAll(generateParenthesisHelper(n, pairCount + 1, openCount, curr + ")"));
+        } else if (isFullyClosed) {
+            result.addAll(generateParenthesisHelper(n, pairCount, openCount + 1, curr + "("));
+        } else {
+            result.addAll(generateParenthesisHelper(n, pairCount + 1, openCount, curr + ")"));
+            result.addAll(generateParenthesisHelper(n, pairCount, openCount + 1, curr + "("));
         }
         return result;
     }
@@ -79,12 +69,8 @@ class Solution22 {
 }
 
 /**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode(int x) { val = x; }
- * }
+ * Definition for singly-linked list. public class ListNode { int val; ListNode
+ * next; ListNode(int x) { val = x; } }
  */
 class Solution23 {
     private boolean notEnd(ListNode[] pointers, int len) {
@@ -127,8 +113,7 @@ class Solution23 {
                 root = new ListNode(currMinVal);
                 curr = root;
 
-            }
-            else {
+            } else {
                 curr.next = new ListNode(currMinVal);
                 curr = curr.next;
             }
@@ -153,7 +138,7 @@ class Solution26 {
         for (int i = 1; i < nums.length; i++) {
             if (nums[i] != previousInt) {
                 len++;
-                nums[len-1] = nums[i];
+                nums[len - 1] = nums[i];
                 previousInt = nums[i];
             }
         }
@@ -177,7 +162,8 @@ class Solution28 {
 
 class Solution29 {
     public int divide(int dividend, int divisor) {
-        if (dividend == 0) return 0;
+        if (dividend == 0)
+            return 0;
 
         // long to avoid overflow
         long dividendl = (long) dividend;
@@ -188,8 +174,10 @@ class Solution29 {
             neg = true;
 
         // need to operate on long; for example int.min * -1 will overflow
-        if (dividendl < 0) dividendl *= -1;
-        if (divisorl < 0) divisorl *= -1;
+        if (dividendl < 0)
+            dividendl *= -1;
+        if (divisorl < 0)
+            divisorl *= -1;
 
         long start = 0;
         long end = dividendl;
@@ -206,12 +194,28 @@ class Solution29 {
                     return Integer.MIN_VALUE;
                 else
                     return (int) mid;
-            }
-            else if (diff < 0)
+            } else if (diff < 0)
                 end = mid - 1;
             else if (diff > 0)
                 start = mid + 1;
         }
         return -1;
+    }
+}
+
+// special case: insert at front
+class Solution35 {
+    public int searchInsert(int[] nums, int target) {
+        int start = 0;
+        int end = nums.length - 1;
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
+            if (target > nums[mid]) {
+                start = mid + 1;
+            } else {
+                end = mid - 1;
+            }
+        }
+        return end < 0 ? 0 : start;
     }
 }

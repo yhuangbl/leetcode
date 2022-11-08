@@ -1,6 +1,6 @@
 class Solution273 {
     private String generatePartialStr(String partial, String addStr) {
-        return ("".equals(partial))? addStr: (" " + addStr);
+        return ("".equals(partial)) ? addStr : (" " + addStr);
     }
 
     /**
@@ -11,12 +11,12 @@ class Solution273 {
             return "Zero";
         }
 
-        List<String> numbers = Arrays.asList("Zero", "One", "Two", "Three", "Four",
-                "Five", "Six", "Seven", "Eight", "Nine");
-        List<String> tenMulti = Arrays.asList("NA", "Ten", "Twenty", "Thirty", "Forty", "Fifty",
-                "Sixty", "Seventy", "Eighty", "Ninety");
-        List<String> specials = Arrays.asList("Ten", "Eleven", "Twelve", "Thirteen", "Fourteen",
-                "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen");
+        List<String> numbers = Arrays.asList("Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight",
+                "Nine");
+        List<String> tenMulti = Arrays.asList("NA", "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy",
+                "Eighty", "Ninety");
+        List<String> specials = Arrays.asList("Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen",
+                "Seventeen", "Eighteen", "Nineteen");
         List<String> levels = Arrays.asList("NA", "Thousand", "Million", "Billion");
 
         String result = "";
@@ -25,8 +25,7 @@ class Solution273 {
             int lastThree = num % 1000;
             if (lastThree == 0) {
                 // ignore
-            }
-            else {
+            } else {
                 String partial = "";
                 int hundred = lastThree / 100;
                 int mid = lastThree % 100 / 10;
@@ -36,15 +35,13 @@ class Solution273 {
                 }
 
                 if (mid > 1 || (mid == 1 && last == 0)) {
-                    String addLast = (last > 0)? " " + numbers.get(last): "";
+                    String addLast = (last > 0) ? " " + numbers.get(last) : "";
                     String addStr = generatePartialStr(partial, tenMulti.get(mid) + addLast);
                     partial += addStr;
-                }
-                else if (mid == 1) {
+                } else if (mid == 1) {
                     String addStr = generatePartialStr(partial, specials.get(last));
                     partial += addStr;
-                }
-                else if (mid == 0) {
+                } else if (mid == 0) {
                     if (last != 0 || (last == 0 && hundred == 0)) {
                         String addStr = generatePartialStr(partial, numbers.get(last));
                         partial += addStr;
@@ -57,8 +54,7 @@ class Solution273 {
 
                 if (!"".equals(result)) {
                     result = partial + " " + result;
-                }
-                else {
+                } else {
                     result = partial;
                 }
 
@@ -70,30 +66,24 @@ class Solution273 {
     }
 }
 
-/* The isBadVersion API is defined in the parent class VersionControl.
-      boolean isBadVersion(int version); */
+/*
+ * The isBadVersion API is defined in the parent class VersionControl. boolean
+ * isBadVersion(int version);
+ */
 
 public class Solution278 extends VersionControl {
     public int firstBadVersion(int n) {
-        long left = 1;
-        long right = (long) n;
-        while (left <= right) {
-            long addition = left + right; // avoid overflow
-            long midTmp =  (addition / (long) 2);
-            int mid = (int) midTmp; // start + (end-start) / 2; to avoid overflow
+        int start = 1;
+        int end = n;
+        while (start <= end) {
+            int mid = start + (end - start) / 2; // faster than (start + end)/2 (WHY!); also avoid overflow
             if (isBadVersion(mid)) {
-                if (!isBadVersion(mid - 1)) {
-                    return mid;
-                }
-                else {
-                    right = mid - 1;
-                }
-            }
-            else {
-                left = mid + 1;
+                end = mid - 1;
+            } else {
+                start = mid + 1;
             }
         }
-        return n; // should not reach here
+        return start;
     }
 }
 
@@ -109,11 +99,11 @@ class Solution279 {
         }
 
         int num = n;
-        for (int i = 2; i*i <= n; i++) {
-            int currSquare = i*i;
+        for (int i = 2; i * i <= n; i++) {
+            int currSquare = i * i;
             int quot = n / currSquare;
             int remain = n % currSquare;
-            num = Math.min(num, quot+numSquares(remain));
+            num = Math.min(num, quot + numSquares(remain));
         }
         return num;
     }
