@@ -17,8 +17,10 @@ while left <= right:
 ```
 
 ## Two pointers
-- 1 fast pointer & 1 slow pointer
-- 從頭尾
+- searching pairs in array/string
+- variation
+    - 1 fast pointer & 1 slow pointer (https://leetcode.com/problems/remove-duplicates-from-sorted-array/)
+    - 從頭尾 (https://www.geeksforgeeks.org/two-pointers-technique/)
 
 ## Tree traversal order:
 - time complexity: O(V+E)

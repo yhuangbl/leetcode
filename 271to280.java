@@ -76,7 +76,8 @@ public class Solution278 extends VersionControl {
         int start = 1;
         int end = n;
         while (start <= end) {
-            int mid = start + (end - start) / 2; // faster than (start + end)/2 (WHY!); also avoid overflow
+            int mid = start + (end - start) / 2; // faster than (start + end)/2 because it might overflow and becomes
+                                                 // negative
             if (isBadVersion(mid)) {
                 end = mid - 1;
             } else {

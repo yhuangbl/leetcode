@@ -18,10 +18,9 @@ class Solution973 {
     }
 
     /**
-     * Time comlexity: O(nlogn)
-     * Time comlexity can be improved to O(nlogk) if we always maintain only
-     * k elements in the priority queue
-     * Space complexity: O(n) can be improved to O(k) using the same method
+     * Time comlexity: O(nlogn) Time comlexity can be improved to O(nlogk) if we
+     * always maintain only k elements in the priority queue Space complexity: O(n)
+     * can be improved to O(k) using the same method
      */
     public int[][] kClosest(int[][] points, int K) {
         int len = points.length;
@@ -48,6 +47,25 @@ class Solution973 {
 
         for (int i = 0; i < K; i++) {
             result[i] = points[closest.remove().getIdx()];
+        }
+        return result;
+    }
+}
+
+class Solution977 { // 2 pointer
+    public int[] sortedSquares(int[] nums) {
+        int[] result = new int[nums.length];
+        int left = 0;
+        int right = nums.length - 1;
+        int write = nums.length - 1;
+        while (left <= right) {
+            if (Math.abs(nums[left]) > Math.abs(nums[right])) {
+                result[write--] = nums[left] * nums[left];
+                left++;
+            } else {
+                result[write--] = nums[right] * nums[right];
+                right--;
+            }
         }
         return result;
     }
