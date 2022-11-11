@@ -17,7 +17,8 @@
  */
 
 /**
- * reference: https://zhuhan0.blogspot.com/2017/08/leetcode-341-flatten-nested-list.html
+ * reference:
+ * https://zhuhan0.blogspot.com/2017/08/leetcode-341-flatten-nested-list.html
  */
 public class NestedIterator341 implements Iterator<Integer> {
     private Stack<NestedInteger> listStack;
@@ -44,8 +45,7 @@ public class NestedIterator341 implements Iterator<Integer> {
             if (topNestedInteger.isInteger()) {
                 this.top = topNestedInteger.getInteger();
                 return true;
-            }
-            else {
+            } else {
                 List<NestedInteger> topNestedIntList = topNestedInteger.getList();
                 for (int i = topNestedIntList.size() - 1; i >= 0; i--) {
                     this.listStack.push(topNestedIntList.get(i));
@@ -58,6 +58,18 @@ public class NestedIterator341 implements Iterator<Integer> {
 
 /**
  * Your NestedIterator object will be instantiated and called as such:
- * NestedIterator i = new NestedIterator(nestedList);
- * while (i.hasNext()) v[f()] = i.next();
+ * NestedIterator i = new NestedIterator(nestedList); while (i.hasNext()) v[f()]
+ * = i.next();
  */
+
+class Solution344 {
+    public void reverseString(char[] s) {
+        int left = 0;
+        int right = s.length - 1;
+        while (left < right) {
+            char tmp = s[left];
+            s[left++] = s[right];
+            s[right--] = tmp;
+        }
+    }
+}
