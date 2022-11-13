@@ -3,7 +3,7 @@ class Solution875 {
         int numHour = 0;
 
         Queue<Integer> rest = new LinkedList<Integer>();
-        for (int num: piles) {
+        for (int num : piles) {
             if (num > K) {
                 rest.add(num % K);
                 numHour += num / K;
@@ -27,7 +27,7 @@ class Solution875 {
      */
     public int minEatingSpeed(int[] piles, int H) {
         int maxPile = Integer.MAX_VALUE;
-        for (int num: piles) {
+        for (int num : piles) {
             maxPile = Math.max(num, maxPile);
         }
 
@@ -44,5 +44,34 @@ class Solution875 {
             }
         }
         return smallest;
+    }
+}
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution876 {
+    public ListNode middleNode(ListNode head) {
+        ListNode fast = head;
+        ListNode slow = head;
+        while (true) {
+            if (fast.next == null) {
+                break;
+            }
+            slow = slow.next;
+            fast = fast.next;
+            if (fast.next == null) {
+                break;
+            }
+            fast = fast.next;
+        }
+        return slow;
     }
 }

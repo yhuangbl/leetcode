@@ -210,8 +210,17 @@ class Solution17 {
  * public class ListNode {
  *     int val;
  *     ListNode next;
- *     ListNode(int x) { val = x; }
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
+ * 
+ * The number of nodes in the list is sz.
+ * 1 <= sz <= 30
+ * 0 <= Node.val <= 100
+ * 1 <= n <= sz
+ * 
+ * This solution: O(sz * n) -> can we do better? 
  */
 class Solution19 {
     public ListNode removeNthFromEndTwoPass(ListNode head, int n) {
@@ -239,6 +248,33 @@ class Solution19 {
             curr.next = curr.next.next;
         }
 
+        return head;
+    }
+
+    public ListNode removeNthFromEndTwoPass2(ListNode head, int n) {
+        if (head.next == null && n == 1) {
+            return null;
+        }
+        
+        ListNode prev = null;
+        ListNode curr = head;
+        while (curr != null) {
+            ListNode tmp = curr;
+            for (int i = 0; i < n; i++) {
+                tmp = tmp.next;
+            }
+            if (tmp == null) { // delete curr
+                if (curr == head) {
+                    return head.next;
+                } else {
+                    prev.next = curr.next;
+                }
+                   break;
+            } else {
+                prev = curr;
+                curr = curr.next;
+            }
+        }
         return head;
     }
 }
