@@ -129,32 +129,26 @@ class Solution3 {
     }
 
     /**
-     * Sliding window method
+     * 2 pointers /sliding window
      * Time: O(n); Space: O(min(m,n)) where m is the hashset size
      */
     public int lengthOfLongestSubstring2(String s) {
-        if (s == null || s.length() == 0) {
-            return 0;
+        if (s.length() <= 1) {
+            return s.length();
         }
-
-        int longestLen = 1;
-        int strlen = s.length(); // string length in java
-        Set<Character> usedChar = new HashSet<Character>();
-        int i = 0;
-        int j = i;
-        while (i < strlen) {
-            if (j < strlen && !usedChar.contains(s.charAt(j))) {
-                longestLen = Math.max(longestLen, j - i + 1);
-                usedChar.add(s.charAt(j));
-                j++;
+        
+        int left = 0;
+        int right = 0;
+        int max = 1;
+        Set<Character> unique_chars = new HashSet<Character>();
+        while (right < s.length()) {
+            max = Math.max(max, right-left);
+            while (unique_chars.contains(s.charAt(right))) {
+                unique_chars.remove(s.charAt(left++));
             }
-            else {
-                usedChar.remove(s.charAt(i));
-                i++;
-                j = i;
-            }
+            unique_chars.add(s.charAt(right++));
         }
-        return longestLen;
+        return Math.max(max, right-left);
     }
 }
 

@@ -255,7 +255,7 @@ class Solution19 {
         if (head.next == null && n == 1) {
             return null;
         }
-        
+
         ListNode prev = null;
         ListNode curr = head;
         while (curr != null) {
@@ -269,7 +269,7 @@ class Solution19 {
                 } else {
                     prev.next = curr.next;
                 }
-                   break;
+                break;
             } else {
                 prev = curr;
                 curr = curr.next;

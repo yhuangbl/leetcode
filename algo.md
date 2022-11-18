@@ -17,7 +17,7 @@ while left <= right:
 ```
 
 ## Two pointers
-- searching pairs in array/string
+- searching pairs in array, string, linked list
 - variation
     - 1 fast pointer & 1 slow pointer (https://leetcode.com/problems/remove-duplicates-from-sorted-array/)
     - 從頭尾 (https://www.geeksforgeeks.org/two-pointers-technique/)
@@ -73,9 +73,7 @@ merge(A, left, mid, right)
 
 
 ## Sliding window
-Key idea: having computed the sum of 1st window (size k), in order to get the sum of the next overlapping window we just
- need to leave out the leftmost item value and add the new (rightmost) item’s value, so we are essentially saving the
- re-computation of the sum for the non-changing part of the window.
+Key idea: having computed the sum of 1st window (**fixed** size k), in order to get the sum of the next overlapping window we just need to leave out the leftmost item value and add the new (rightmost) item’s value, so we are essentially saving the re-computation of the sum for the non-changing part of the window.
 
 Template:
 ```
