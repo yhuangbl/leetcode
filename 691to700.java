@@ -1,10 +1,9 @@
 class Solution695 {
     /**
-     * Key: use DFS instead of BFS (why??)
      * Optimization: 
      * - Time
-     *    - DFS
      *    - Validate before adding to stack
+     *    - grid[i][j] == 2 before adding to stack to make sure each is only in stack/queue once
      * - Space
      *    - grid value = 2 instead of visited 2D array (because it says grid value can only be 0 or 1)
      */
@@ -16,6 +15,7 @@ class Solution695 {
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[0].length; j++) {
                 if (grid[i][j] == 1) {
+                    // areaOfIslandDFS or areaOfIslandBFS here
                     maxArea = Math.max(maxArea, areaOfIsland(grid, i, j, m, n));
                 }
             }
@@ -23,36 +23,66 @@ class Solution695 {
         return maxArea;
     }
 
-    public int areaOfIsland(int[][] grid, int sr, int sc, int m, int n) {
+    public int areaOfIslandDFS(int[][] grid, int sr, int sc, int m, int n) {
         Stack<Pair<Integer, Integer>> s = new Stack<>();
-        s.push(new Pair<>(sr, sc));
+        s.add(new Pair<>(sr, sc));
+        grid[sr][sc] = 2;
 
         int area = 0;
         while (!s.isEmpty()) {
             Pair<Integer, Integer> curr = s.pop();
             int r = curr.getKey();
-            int c = curr.getValue(); 
-            // need this because when the node was first added, it might not be seen yet
-            // However, during DFS traversal of some previous node's descendants, it might be seen now 
-            // This is a graph not a tree!
-            if (grid[r][c] == 1) { 
-                area++;
-                grid[r][c] = 2;
-            }
+            int c = curr.getValue();
+            area++;
 
             if (r + 1 < m && grid[r + 1][c] == 1) {
+                grid[r + 1][c] = 2;
                 s.add(new Pair<>(r + 1, c));
             }
             if (r - 1 >= 0 && grid[r - 1][c] == 1) {
+                grid[r - 1][c] = 2;
                 s.add(new Pair<>(r - 1, c));
             }
             if (c + 1 < n && grid[r][c + 1] == 1) {
+                grid[r][c + 1] = 2;
                 s.add(new Pair<>(r, c + 1));
             }
             if (c - 1 >= 0 && grid[r][c - 1] == 1) {
+                grid[r][c - 1] = 2;
                 s.add(new Pair<>(r, c - 1));
             }
+        }
+        return area;
+    }
 
+    public int areaOfIslandBFS(int[][] grid, int sr, int sc, int m, int n) {
+        Queue<Pair<Integer, Integer>> s = new LinkedList<>();
+        s.add(new Pair<>(sr, sc));
+        grid[sr][sc] = 2;
+
+        int area = 0;
+        while (!s.isEmpty()) {
+            Pair<Integer, Integer> curr = s.poll();
+            int r = curr.getKey();
+            int c = curr.getValue();
+            area++;
+
+            if (r + 1 < m && grid[r + 1][c] == 1) {
+                grid[r + 1][c] = 2;
+                s.add(new Pair<>(r + 1, c));
+            }
+            if (r - 1 >= 0 && grid[r - 1][c] == 1) {
+                grid[r - 1][c] = 2;
+                s.add(new Pair<>(r - 1, c));
+            }
+            if (c + 1 < n && grid[r][c + 1] == 1) {
+                grid[r][c + 1] = 2;
+                s.add(new Pair<>(r, c + 1));
+            }
+            if (c - 1 >= 0 && grid[r][c - 1] == 1) {
+                grid[r][c - 1] = 2;
+                s.add(new Pair<>(r, c - 1));
+            }
         }
         return area;
     }

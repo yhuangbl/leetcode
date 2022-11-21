@@ -33,7 +33,6 @@ while left <= right:
 - BFS:
     - level-order
     - 用queue (both recursive and iterative): https://www.techiedelight.com/breadth-first-search/
-- For a problem that can use either BFS or DFS: BFS is used for finding the shortest path in a graph, because it starts from a vertex and "radiates" outside from it, like a wave. DFS can find a path which may not necessarily be the shortest. In a directed acyclic graph (DAG), DFS finds the timestamp of vertex discovery and can be used to order vertices (example - topological sort). For a DAG like a tree, assuming the tree is fairly balanced, DFS is preferred because it requires less space (O(lgn)) than BFS (O(n)).
 
 ## Topological sort
 - time complexity: O(V+E)
