@@ -22,17 +22,18 @@ while left <= right:
     - 1 fast pointer & 1 slow pointer (https://leetcode.com/problems/remove-duplicates-from-sorted-array/)
     - 從頭尾 (https://www.geeksforgeeks.org/two-pointers-technique/)
 
-## Tree traversal order:
-- time complexity: O(V+E)
+## BFS, DFS & Tree traversal order:
+- time complexity: O(N) for binary tree/ O(V+E) for Graph
 - DFS: (記root在哪)
     - inorder: left, root, right
     - preorder: root, left, right
     - postorder: left, right, root
-    - 用recursion
+    - 用recursion: https://www.geeksforgeeks.org/tree-traversals-inorder-preorder-and-postorder/
     - 用stack for iterative method: https://www.techiedelight.com/depth-first-search/
 - BFS:
     - level-order
     - 用queue (both recursive and iterative): https://www.techiedelight.com/breadth-first-search/
+- For a problem that can use either BFS or DFS: BFS is used for finding the shortest path in a graph, because it starts from a vertex and "radiates" outside from it, like a wave. DFS can find a path which may not necessarily be the shortest. In a directed acyclic graph (DAG), DFS finds the timestamp of vertex discovery and can be used to order vertices (example - topological sort). For a DAG like a tree, assuming the tree is fairly balanced, DFS is preferred because it requires less space (O(lgn)) than BFS (O(n)).
 
 ## Topological sort
 - time complexity: O(V+E)

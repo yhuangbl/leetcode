@@ -286,6 +286,22 @@ class Solution34 {
     }
 }
 
+class Solution35 {
+    public int searchInsert(int[] nums, int target) {
+        int start = 0;
+        int end = nums.length - 1;
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
+            if (target > nums[mid]) {
+                start = mid + 1;
+            } else {
+                end = mid - 1;
+            }
+        }
+        return end < 0 ? 0 : start;
+    }
+}
+
 class Solution36 {
     public boolean isValidSudoku(char[][] board) {
         if (board == null) return false;
