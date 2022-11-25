@@ -50,10 +50,44 @@ class Solution116 {
         return root;
     }
 
+     /**
+     * BFS 2
+     */
+    public Node connect2(Node root) {
+        if (root == null) {
+            return null;
+        }
+        int level = 0;
+        int curr_level_max = (int) Math.pow(2, level);
+        int cnt = 0;
+        Node prev =  null;
+        Queue<Node> q = new LinkedList<Node>();
+        q.add(root);
+        while (!q.isEmpty()) {
+            Node curr = q.poll();
+            if (prev != null) {
+                prev.next = curr;
+            }
+            if (++cnt == curr_level_max) {
+                curr.next = null;
+                curr_level_max = (int) Math.pow(2, ++level);
+                cnt = 0;
+                prev = null;
+            } else {
+              prev = curr;
+            }
+            if (curr.left != null && curr.right != null) { // it's balanced 
+                            q.add(curr.left);
+            q.add(curr.right);
+            }
+        }
+        return root;
+    }
+
     /**
      * Recursion
      */
-    public Node connect2(Node root) {
+    public Node connect3(Node root) {
         if (root == null)
             return null;
 
@@ -67,9 +101,27 @@ class Solution116 {
             }
         }
 
-        connect(root.left);
-        connect(root.right);
+        connect3(root.left);
+        connect3(root.right);
 
+        return root;
+    }
+
+    /**
+     * Recursion
+     */
+    public Node connect4(Node root) {
+        if (root == null) {
+            return null;
+        }
+
+        if (root.left != null && root.right != null) { // balanced 
+            root.left.next = root.right;
+            root.right.next = root.next == null? null: root.next.left;
+            connect4(root.left);
+            connect4(root.right);
+        }
+        
         return root;
     }
 }
