@@ -33,6 +33,7 @@ while left <= right:
 - BFS:
     - level-order
     - 用queue (both recursive and iterative): https://www.techiedelight.com/breadth-first-search/
+    - find smallest distance (e.g. use Topological Sort)
 
 ## Topological sort
 - time complexity: O(V+E)
