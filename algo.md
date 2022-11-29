@@ -30,13 +30,12 @@ while left <= right:
     - postorder: left, right, root
     - 用recursion: https://www.geeksforgeeks.org/tree-traversals-inorder-preorder-and-postorder/
     - 用stack for iterative method: https://www.techiedelight.com/depth-first-search/
+    - application: cycle detection
 - BFS:
     - level-order
     - 用queue (both recursive and iterative): https://www.techiedelight.com/breadth-first-search/
     - find smallest distance (e.g. use Topological Sort)
-
-## Topological sort
-- time complexity: O(V+E)
+    - application: Topological Sort
 
 ## Backtracking
 - Algorithm: Backtracking is an algorithmic-technique for solving problems **recursively** by trying to build a solution incrementally, one piece at a time, removing those solutions that fail to satisfy the constraints of the problem at any point of time.
