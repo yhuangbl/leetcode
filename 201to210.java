@@ -45,7 +45,7 @@ class Solution206 {
         ListNode prev = null;
         ListNode curr = null;
         while (p != null) {
-            curr = new ListNode(p.val);
+            curr = new ListNode(p.val); // new makes it a bit slower
             curr.next = prev;
             prev = curr;
             p = p.next;
@@ -66,6 +66,23 @@ class Solution206 {
             return newHead;
         }
         return head;
+    }
+
+    public ListNode reverseListIterative(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode p = head;
+        ListNode nextP = head.next;
+        head.next = null;
+        while (p != null & nextP != null) {
+            ListNode nextNextP = nextP.next;
+            nextP.next = p;
+            
+            p = nextP;
+            nextP = nextNextP; 
+        }
+        return p;
     }
 }
 
