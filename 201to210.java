@@ -29,6 +29,46 @@ class Solution202 {
     }
 }
 
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution206 {
+    public ListNode reverseList(ListNode head) { // O(n)
+        ListNode p = head;
+        ListNode prev = null;
+        ListNode curr = null;
+        while (p != null) {
+            curr = new ListNode(p.val);
+            curr.next = prev;
+            prev = curr;
+            p = p.next;
+        }
+        return curr;
+    }
+
+    public ListNode reverseListRecursion(ListNode head) {
+        if (head == null) {
+            return null;
+        }
+        
+        ListNode p = head.next;
+        head.next = null;
+        if (p != null) {
+            ListNode newHead = reverseList(p);
+            p.next = head;
+            return newHead;
+        }
+        return head;
+    }
+}
+
 class Solution207 {
     /**
      * key: 等於是在問有沒有cycle (用dfs找cycle)

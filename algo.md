@@ -40,6 +40,10 @@ while left <= right:
 ## Backtracking
 - Algorithm: Backtracking is an algorithmic-technique for solving problems **recursively** by trying to build a solution incrementally, one piece at a time, removing those solutions that fail to satisfy the constraints of the problem at any point of time.
 - Problem properties: These problems can only be solved by trying every possible configuration and each configuration is tried only once.
+- Decision Problem: search for a feasible solution.
+- Optimization Problem: search for the best solution.
+- Enumeration Problem: search for all feasible solutions.
+https://www.geeksforgeeks.org/introduction-to-backtracking-data-structure-and-algorithm-tutorials/
 
 ## Quick sort template
 ```

@@ -1,6 +1,12 @@
 /**
- * Definition for singly-linked list. public class ListNode { int val; ListNode
- * next; ListNode(int x) { val = x; } }
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
  */
 class Solution21 {
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
@@ -36,6 +42,19 @@ class Solution21 {
             }
         }
         return result;
+    }
+
+    public ListNode mergeTwoListsRecursion(ListNode list1, ListNode list2) {
+        if (list1 == null) {
+            return list2;
+        }
+        if (list2 == null) {
+            return list1;
+        }
+        boolean isList1Smaller = list1.val <= list2.val;
+        ListNode head = new ListNode(isList1Smaller? list1.val: list2.val);
+        head.next = mergeTwoLists(isList1Smaller? list1.next: list1, isList1Smaller?list2: list2.next);
+        return head;
     }
 }
 
