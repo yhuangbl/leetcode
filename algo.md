@@ -39,11 +39,53 @@ while left <= right:
 
 ## Backtracking
 - Algorithm: Backtracking is an algorithmic-technique for solving problems **recursively** by trying to build a solution incrementally, one piece at a time, removing those solutions that fail to satisfy the constraints of the problem at any point of time.
+- can analyze with a "State Space Tree" (all the possible states (solution or nonsolution) of the problem from the root as an initial state to the leaf as a terminal state.)
 - Problem properties: These problems can only be solved by trying every possible configuration and each configuration is tried only once.
 - Decision Problem: search for a feasible solution.
 - Optimization Problem: search for the best solution.
 - Enumeration Problem: search for all feasible solutions.
 https://www.geeksforgeeks.org/introduction-to-backtracking-data-structure-and-algorithm-tutorials/
+- template (python; [source](https://christianjmills.com/posts/backtracking-notes/index.html))
+```
+# Check if the current state is a valid solution
+def is_valid_state(state):
+    # check if is a valid solution
+    return True
+
+# Get list of potential next steps
+def get_candidates(state):
+    return []
+
+# Recursively, perform a depth-first search to find valid solutions
+def search(state, solutions):
+    # Check is the state is valid
+    if is_valid_state(state):
+        # Add a copy of the valid state to list of solutions
+        solutions.append(state.copy())
+        # return # uncomment if you only need to find one valid solution
+
+    # Iterate through the candidates that can be used
+    # to construct the next state
+    for candidate in get_candidates(state):
+        # Add candidate to the current state
+        state.add(candidate)
+        # Call search function with updated state
+        search(state, solutions)
+        # Remove the current candidate from the current state
+        state.remove(candidate)
+
+# Entry point to the program
+# responsible for returning the valid solutions
+def solve():
+    # start with an empty list of solutions
+    solutions = []
+    # start with an empty state
+    state = set()
+    # initiate the recursive search
+    search(state, solutions)
+    # return the final list of solutions
+    return solutions
+```
 
 ## Quick sort template
 ```
