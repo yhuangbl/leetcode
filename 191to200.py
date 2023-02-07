@@ -1,3 +1,12 @@
+class Solution191:
+    def hammingWeight(self, n: int) -> int:
+        if n == 1:
+            return 1
+        if n == 0: 
+            return 0
+        # in Python: / is true division (floating point); // is integer division (floor)
+        return self.hammingWeight(n//2) + (1 if n%2 == 1 else 0)
+
 class Solution198:
     def rob(self, nums: List[int]) -> int:
         total = [nums[0]]
