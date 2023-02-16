@@ -6,6 +6,14 @@ class Solution191:
             return 0
         # in Python: / is true division (floating point); // is integer division (floor)
         return self.hammingWeight(n//2) + (1 if n%2 == 1 else 0)
+    
+    # bit manipulation => how many 1s? use magic number
+    def hammingWeight2(self, n: int) -> int:
+        weight = 0
+        while n > 0: 
+            n = n & (n-1)
+            weight += 1
+        return weight
 
 class Solution198:
     def rob(self, nums: List[int]) -> int:

@@ -19,3 +19,12 @@ class Solution190:
             ans.append(n%2)
             self.reverseBitsHelper(n//2, ans)
         return ans
+    
+    # Bit manipulation 
+    def reverseBits2(self, n: int) -> int:
+        res = 0
+        for _ in range(self.TOTAL_LEN):
+            last_bit = n & 1
+            res = res << 1 | last_bit
+            n = n >> 1
+        return res
