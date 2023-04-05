@@ -6,6 +6,7 @@
 ![heapify](heap3.png)
 ![build a heap](heap4.png)
 Why A.length / 2? 因為> A.length / 2的在最底層，可以被交換
+Build & Delete: O(n)
 ![heap sort](heap5.png)
 why A.length downto 2?
 A.length是最小的

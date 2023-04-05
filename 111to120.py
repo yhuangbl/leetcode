@@ -5,7 +5,7 @@
 #         self.left = left
 #         self.right = right
 class Solution113:
-    # backtracking problem
+    # backtracking problem using DFS (O(n))
     # edge case 1: root node is target
     # edge case 2: value might be negative! (currSum might go down to targetSum)
     def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
