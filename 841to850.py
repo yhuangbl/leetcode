@@ -25,3 +25,20 @@ class Solution841:
                 if self.canVisitAllRoomsHelper(room, new_keys, visited_copy):
                     return True
         return False
+
+    def canVisitAllRooms2(self, rooms: List[List[int]]) -> bool:
+        num_visited = 1 # start with room 0
+        total_rooms = len(rooms)
+        visited_rooms = set([0])
+        stack = [] + rooms[0]
+        while stack:
+            front = stack.pop()
+            if front not in visited_rooms:
+                visited_rooms.add(front)
+                num_visited += 1
+                if num_visited == total_rooms:
+                    return True
+            for nxt in rooms[front]:
+                if nxt not in visited_rooms:
+                    stack.append(nxt)
+        return False

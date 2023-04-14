@@ -6,7 +6,7 @@
 #         self.right = right
 
 class Solution103:
-    # Time: O(n); Space: O(n)
+    # BFS; Time: O(n); Space: O(n)
     def zigzagLevelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
         stack = []
         queue = [root] if root else []
@@ -60,4 +60,26 @@ class Solution105:
         if root_val_idx is not None:
             root.left = self.buildTree(preorder[1:1+root_val_idx], inorder[:root_val_idx])
             root.right = self.buildTree(preorder[1+root_val_idx:], inorder[root_val_idx+1:])
+        return root
+
+    # Time complexity: O(n)
+    def buildTree2(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
+        if not preorder:
+            return None
+        
+        l = len(preorder)
+        i_idx_map = {n: i for (i,n) in enumerate(inorder)}
+        return self.buildTreeHelper(preorder, inorder, i_idx_map, 0, l-1, 0, l-1)
+    
+    def buildTreeHelper(self, preorder: List[int], inorder: List[int], i_idx_map: Dict[int, int], p_start, p_end, i_start, i_end) -> Optional[TreeNode]:
+        if p_start > p_end or i_start > i_end: 
+            return None
+        
+        root_val = preorder[p_start]
+        root = TreeNode(root_val)
+        i_idx = i_idx_map[root_val]
+        left_len = i_idx - i_start
+
+        root.left = self.buildTreeHelper(preorder, inorder, i_idx_map, p_start+1, p_start+left_len, i_start, i_idx-1)
+        root.right = self.buildTreeHelper(preorder, inorder, i_idx_map, p_start+1+left_len, p_end, i_idx+1, i_end)
         return root
