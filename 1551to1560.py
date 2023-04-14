@@ -1,6 +1,7 @@
 from collections import defaultdict
 
 class Solution1557:
+    # Time complexity: DFS => O(V+E)
     def findSmallestSetOfVertices(self, n: int, edges: List[List[int]]) -> List[int]:
         all_nodes = set(range(n))
         graph = defaultdict(list)
@@ -22,4 +23,14 @@ class Solution1557:
             nexts = graph[front]
             for n in nexts:
                 if n in all_nodes:
-                    stack.append(n
+                    stack.append(n)
+
+    # Time complexity: O(E)
+    # Why? only leave zero degree nodes
+    def findSmallestSetOfVertices2(self, n: int, edges: List[List[int]]) -> List[int]:
+        all_nodes = set(range(n))
+        for e in edges:
+            end = e[1]
+            if end in all_nodes:
+                all_nodes.discard(end) # discard is faster than remove because doesn't need to raise exception
+        return all_nodes
