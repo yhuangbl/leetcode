@@ -1,3 +1,21 @@
+class Solution74:
+    # Time: O(log(m*n)) => treat 2D array as 1D array
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        m = len(matrix)
+        n = len(matrix[0])
+        s_idx, e_idx = 0, m*n-1
+        while s_idx <= e_idx:
+            m_idx = s_idx + (e_idx-s_idx)//2
+            r = m_idx // n
+            c = m_idx - n*r # m_idx = n*r + c
+            if matrix[r][c] == target:
+                return True
+            if matrix[r][c] > target: 
+                e_idx = m_idx-1
+            else:
+                s_idx = m_idx+1
+        return False
+
 class Solution77: # combination
 
     # time complexity: O(k * C(n,k))
