@@ -32,7 +32,7 @@ Partition:
 pivot = A[right]
 boundary = left - 1 // end of small
 for i from left to right:
-    if A[i] < pivot:
+    if A[i] < pivot: // small to large; if want to sort in another order, change the operator
         i++
         swap A[boundary] & A[i]
 big_boundary = boundary + 1
@@ -56,3 +56,8 @@ while left <= right:
     else
         right = p-1
 ```
+
+**Quicksort and Quickselect optimization: pivot randomization**
+Before `Partition`, randomly choose an element in the array to swap with the last one
+
+Example: 215 (solution 4)
