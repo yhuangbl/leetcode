@@ -1,6 +1,8 @@
 from queue import PriorityQueue
 
 class Solution215:
+    
+    # Priority Queue
     # Time: O(nlogn)
     def findKthLargest(self, nums: List[int], k: int) -> int:
         q = PriorityQueue() # max heap
@@ -10,7 +12,8 @@ class Solution215:
             q.get()
         return q.get()*-1
     
-    # Time: O(nlogk) Optimized Priority Queue => building a size-k heap
+    # Optimized Priority Queue => building a size-k heap
+    # Time: O(nlogk) 
     def findKthLargest2(self, nums: List[int], k: int) -> int:
         q = PriorityQueue() # min heap
         for n in nums:
@@ -22,12 +25,11 @@ class Solution215:
                     q.put(n)
         return q.get()
     
-    # Time: O(n) Quickselect; worst case O(n^2)
+    # Quickselect (pivot on last)
+    # Time: O(n), worst case O(n^2) when it's sorted
     def findKthLargest3(self, nums: List[int], k: int) -> int:
-        s_idx = 0
-        total = len(nums)
-        e_idx = total-1
-        target_idx = total-k
+        s_idx, total = 0, len(nums)
+        e_idx, target_idx = total-1, total-k
         while s_idx <= e_idx: 
             p = self.partition(nums, s_idx, e_idx)
             if p == target_idx:
@@ -39,8 +41,7 @@ class Solution215:
         return nums[target_idx]
         
     def partition(self, nums: List[int], s: int, e: int) -> int:
-        pivot = nums[e]
-        boundary = s-1
+        pivot, boundary = nums[e], s-1
         for i in range(s, e+1):
             if nums[i] < pivot:
                 boundary += 1
@@ -53,5 +54,26 @@ class Solution215:
         tmp = nums[b]
         nums[b] = nums[a]
         nums[a] = tmp
+    
+    # Quickselect (random pivot selection)
+    # Time: O(n)
+    def findKthLargest4(self, nums: List[int], k: int) -> int:
+        s_idx, total = 0, len(nums)
+        e_idx, target_idx = total-1, total-k
+        while s_idx <= e_idx: 
+            p = self.partitionRandomPivot(nums, s_idx, e_idx)
+            if p == target_idx:
+                break
+            elif target_idx > p:
+                s_idx = p+1
+            else:
+                e_idx = p-1
+        return nums[target_idx]
+        
+    # to reuse our template, randomly select a pivot and move it to the last element of array
+    def partitionRandomPivot(self, nums: List[int], s: int, e: int)->int:
+        pivot_idx = randint(s, e)
+        self.swap(nums, pivot_idx, e)
+        return self.partition(nums, s, e)
     
     
