@@ -27,6 +27,7 @@ class Solution973:
         return [q.get()[1] for _ in range(k)]
     
     # Optimized quick selection with random pivot
+    # Why quick selection will work? (don't need quick sort) because the result can be in any order
     # Time: O(n)
     def kClosest3(self, points: List[List[int]], k: int) -> List[List[int]]:
         s_idx, e_idx = 0, len(points)-1
