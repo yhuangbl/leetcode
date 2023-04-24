@@ -1,4 +1,5 @@
 ## Binary Search
+
 - Search a sorted array by repeatedly dividing the search interval in half. Begin with an interval covering the whole array. If the value of the search key is less than the item in the middle of the interval, narrow the interval to the lower half. Otherwise narrow it to the upper half. Repeatedly check until the value is found or the interval is empty.
 - Usually use in a **sorted** array
 - Time complexity: O(logn)
@@ -17,12 +18,14 @@ while left <= right:
 ```
 
 ## Two pointers
+
 - searching pairs in array, string, linked list
 - variation
     - 1 fast pointer & 1 slow pointer (https://leetcode.com/problems/remove-duplicates-from-sorted-array/)
     - 從頭尾 (https://www.geeksforgeeks.org/two-pointers-technique/)
 
 ## BFS, DFS & Tree traversal order:
+
 - time complexity: O(N) for binary tree/ O(V+E) for Graph
 - DFS: (記root在哪)
     - inorder: left, root, right
@@ -38,6 +41,7 @@ while left <= right:
     - application: Topological Sort
 
 ## Backtracking
+
 - Algorithm: Backtracking is an algorithmic-technique for solving problems **recursively** by trying to build a solution incrementally, one piece at a time, removing those solutions that fail to satisfy the constraints of the problem at any point of time.
 - can analyze with a "State Space Tree" (all the possible states (solution or nonsolution) of the problem from the root as an initial state to the leaf as a terminal state.)
 - Problem properties: These problems can only be solved by trying every possible configuration and each configuration is tried only once.
@@ -88,6 +92,8 @@ def solve():
 ```
 
 ## Sliding window
+
+=> an extension of 2 pointers
 Key idea: having computed the sum of 1st window (**fixed** size k), in order to get the sum of the next overlapping window we just need to leave out the leftmost item value and add the new (rightmost) item’s value, so we are essentially saving the re-computation of the sum for the non-changing part of the window.
 
 Template:
@@ -143,6 +149,7 @@ public class Solution {
 ```
 
 ## Bit manipulation
+
 Magic numbers: n & (n-1) => 效果是拔掉最後一個1
 ```
 ->   11110101010111100000
