@@ -1,4 +1,4 @@
-class Solution:
+class Solution33:
     # Time: O(logn) => Use binary search to find pivot/min first
     def search(self, nums: List[int], target: int) -> int:
         min_idx = self.searchMin(nums)
@@ -71,3 +71,51 @@ class Solution34:
             else:
                 s_idx = m_idx+1
         return -1
+
+class Solution39:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        ans, state = [], []
+        self.search(candidates, state, 0, target, ans)
+        return ans
+    
+    def search(self, candidates: List[int], state: List[int], curr_sum: int, target: int, ans: List[List[int]]):
+        if self.isValid(curr_sum, target):
+            ans.append(state)
+            return
+        
+        difference = target - curr_sum
+        if difference >= 0:
+            for n in self.getNexts(candidates, state, difference):
+                self.search(candidates, state + [n], curr_sum + n, target, ans )
+    
+    def isValid(self, curr_sum: int, target: int) -> bool: 
+        return curr_sum == target
+    
+    def getNexts(self, candidates: List[int], state: List[int], difference: int) -> List[int]:
+        last = state[-1] if len(state) > 0 else 0
+        return [c for c in candidates if c >= last and c <= difference]
+
+class Solution40:
+    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
+        ans, state = [], []
+        candidates_map = Counter(candidates)
+        self.search(candidates_map, state, 0, target, ans)
+        return ans
+    
+    def search(self, candidates_map: dict[int, int], state: List[int], curr_sum: int, target: int, ans: List[List[int]]):
+        if self.isValid(curr_sum, target):
+            ans.append(state)
+            return
+        
+        difference = target - curr_sum
+        if difference > 0:
+            for n in self.getNext(candidates_map, state, difference):
+                self.search(candidates_map, state+[n], curr_sum+n, target, ans)
+    
+    def isValid(self, curr_sum: int, target: int) -> bool:
+        return curr_sum == target
+    
+    def getNext(self, candidates_map: dict[int, int], state: List[int], difference: int) -> List[int]:
+        state_map = Counter(state)
+        last = state [-1] if len(state) > 0 else 0
+        return [c for c, count in candidates_map.items() if c <= difference and c >= last and (state_map[c] if c in state_map else 0) < count  ]
