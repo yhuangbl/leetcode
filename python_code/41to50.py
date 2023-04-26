@@ -1,3 +1,28 @@
+class Solution45:
+    # DP
+    def jump(self, nums: List[int]) -> int:
+        n = len(nums)
+        num_jumps = [None for _ in range(n)] # 1D array of length n
+        num_jumps[n-1] = 0
+        for i in range(n-2, -1, -1):
+            biggest = nums[i]
+            if biggest >= n-1:
+                num_jumps[i] = 1
+            else:
+                new_jumps = self.getMinJumps(num_jumps, i, biggest, n)
+                num_jumps[i] = 1 + new_jumps if new_jumps is not None else None # None means we cannot get to the end
+        return num_jumps[0]
+    
+    def getMinJumps(self, num_jumps: List[int], start: int, step: int, n: int) -> int: 
+        curr_min = None
+        for i in range(1, step+1):
+            next_i = start+i
+            if next_i < n:
+                curr = num_jumps[start+i]
+                if curr is not None and (curr_min is None or curr < curr_min):
+                    curr_min = curr
+        return curr_min
+
 class Solution46:
     def is_valid(self, state: List[int], target_len: int) -> bool: 
         return len(state) == target_len
@@ -27,7 +52,7 @@ class Solution46:
 
 from collections import Counter
 
-class Solution:
+class Solution47:
     def permuteUnique(self, nums: List[int]) -> List[List[int]]:
         ans = []
         target_map, state = Counter(nums), []
